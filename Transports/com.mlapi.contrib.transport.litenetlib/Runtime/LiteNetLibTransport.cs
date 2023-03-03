@@ -50,6 +50,7 @@ namespace MLAPI.Transports.LiteNetLib
         [Tooltip("Simulated maximum additional latency for packets in milliseconds (0 for no simulation")]
         public int SimulateMaxLatency = 0;
 
+        private static readonly ArraySegment<byte> emptyArraySegment = new ArraySegment<byte>();
         private readonly Dictionary<NetworkChannel, LiteChannel> m_LiteChannels = new Dictionary<NetworkChannel, LiteChannel>();
         readonly Dictionary<ulong, NetPeer> m_Peers = new Dictionary<ulong, NetPeer>();
 
@@ -121,6 +122,7 @@ namespace MLAPI.Transports.LiteNetLib
             // transport is event based ignore this.
             clientId = 0;
             channel = NetworkChannel.ChannelUnused;
+            payload = emptyArraySegment;
             receiveTime = Time.realtimeSinceStartup;
             return NetworkEvent.Nothing;
         }
